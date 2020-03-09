@@ -8,8 +8,6 @@ public class FoxAI : MonoBehaviour
 {
     public NavMeshAgent navMeshAgent;
     public GrassManager grassManager;
-    //public List<Transform> obstacles;
-    float eatRange = 1f;
 
     public Transform target;
     // Start is called before the first frame update
@@ -27,8 +25,8 @@ public class FoxAI : MonoBehaviour
     /// 
     /// Also will check if continuting along the pathfinding direction is possible and if not will repath to the halfway direction between intended direction if the path was valid and the direction vector perpendicular to the direction vector between this AI and the chasing AI
     /// </summary>
-    /// <param name="target"></param>
-    /// <returns></returns>
+    /// <param name="target">Target location</param>
+    /// <returns>Path to take</returns>
     public NavMeshPath DynamicObstacles(Vector3 target, List<Transform> obstacles)
     {
         NavMeshPath navMeshPath = new NavMeshPath();
@@ -67,17 +65,15 @@ public class FoxAI : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets up the Pathfinding Loop in a Coroutine 
+    /// Sets up the Pathfinding Loop in a Coroutine
+    /// 
+    /// Will immediately start looking for a new path once the last path has been decided
     /// </summary>
     IEnumerator PathfindingLoop()
     {
         while (true)
         {
-
-
             navMeshAgent.path = PredictRunner();
-            
-
             yield return new WaitForEndOfFrame();
         }
     }
