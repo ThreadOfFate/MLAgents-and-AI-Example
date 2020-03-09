@@ -29,7 +29,7 @@ public class GenericAgent : Agent
     public TrainingManager trainingManager;
 
     /// <summary>
-    /// Initial setup, called when the agent is enabled
+    /// Initial setup
     /// </summary>
     public override void InitializeAgent()
     {
@@ -39,15 +39,13 @@ public class GenericAgent : Agent
 
     /// <summary>
     /// Perform actions based on a vector of numbers
-    /// Simple implementation, in this project Discrete values are used rather than continuous 
     /// </summary>
     /// <param name="vectorAction">The list of actions to take</param>
     public override void AgentAction(float[] vectorAction)
     {
-        // Convert the first action to forward movement
+
         float forwardAmount = vectorAction[0];
 
-        // Convert the second action to turning left or right
         float turnAmount = 0f;
         if (vectorAction[1] == 1f)
         {
@@ -58,11 +56,10 @@ public class GenericAgent : Agent
             turnAmount = 1f;
         }
 
-        // Apply movement
+
         rigidbody.MovePosition(transform.position + transform.forward * forwardAmount * moveSpeed * Time.fixedDeltaTime);
         transform.Rotate(transform.up * turnAmount * turnSpeed * Time.fixedDeltaTime);
 
-        // Negative Reinforcement, Encourges action
         if (maxStep > 0)
         {
             AddReward(-1f / maxStep);
@@ -70,7 +67,7 @@ public class GenericAgent : Agent
     }
 
     /// <summary>
-    /// 
+    /// Allows the User to control the Agent
     /// </summary>
     /// <returns></returns>
     public override float[] Heuristic()
@@ -111,7 +108,8 @@ public class GenericAgent : Agent
     }
 
     /// <summary>
-    /// Makes a new decision every 5 updates, acts every update
+    /// Asks for a decision every 5 updates
+    /// Asks for a action every other frame
     /// </summary>
     private void FixedUpdate()
     {
@@ -159,7 +157,7 @@ public class GenericAgent : Agent
     }
 
     /// <summary>
-    /// Will reset the Training area when the agent resets
+    /// Resets Envirnment and Agent
     /// </summary>
     public override void AgentReset()
     {

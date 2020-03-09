@@ -7,6 +7,18 @@ TagManager:
   - Sheep
   - Grass
   - Fox
+  - Goal
+  - food
+  - badFood
+  - wall
+  - agent
+  - ground
+  - goal
+  - pit
+  - symbol_X_Goal
+  - symbol_O_Goal
+  - symbol_O
+  - symbol_X
   layers:
   - Default
   - TransparentFX
@@ -16,7 +28,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Agent
   - 
   - 
   - 

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using MLAgents;
 
+/// <summary>
+/// Machine Learning Agent for a fox
+/// </summary>
 public class FoxAgent : Agent
 {
-    [Tooltip("How fast the agent moves forward")]
     public float moveSpeed = 5f;
-
-    [Tooltip("How fast the agent turns")]
     public float turnSpeed = 180f;
 
     new private Rigidbody rigidbody;
@@ -18,7 +18,7 @@ public class FoxAgent : Agent
     
 
     /// <summary>
-    /// Initial setup, called when the agent is enabled
+    /// Initial setup
     /// </summary>
     public override void InitializeAgent()
     {
@@ -32,10 +32,9 @@ public class FoxAgent : Agent
     /// <param name="vectorAction">The list of actions to take</param>
     public override void AgentAction(float[] vectorAction)
     {
-        // Convert the first action to forward movement
+
         float forwardAmount = vectorAction[0];
 
-        // Convert the second action to turning left or right
         float turnAmount = 0f;
         if (vectorAction[1] == 1f)
         {
@@ -46,16 +45,18 @@ public class FoxAgent : Agent
             turnAmount = 1f;
         }
 
-        // Apply movement
+
         rigidbody.MovePosition(transform.position + transform.forward * forwardAmount * moveSpeed * Time.fixedDeltaTime);
         transform.Rotate(transform.up * turnAmount * turnSpeed * Time.fixedDeltaTime);
 
-        // Apply a tiny negative reward every step to encourage action
-        if (maxStep > 0) AddReward(-1f / maxStep);
+        if (maxStep > 0)
+        {
+            AddReward(-1f / maxStep);
+        }
     }
 
     /// <summary>
-    /// 
+    /// Allows the User to control the Agent
     /// </summary>
     /// <returns></returns>
     public override float[] Heuristic()
@@ -64,23 +65,26 @@ public class FoxAgent : Agent
         float turnAction = 0f;
         if (Input.GetKey(KeyCode.W))
         {
-            // move forward
+            
             forwardAction = 1f;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            // turn left
+            
             turnAction = 1f;
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            // turn right
+            
             turnAction = 2f;
         }
-        // Put the actions into an array and return
+        
         return new float[] { forwardAction, turnAction };
     }
 
+    /// <summary>
+    /// Observations, these are the variables the ML Agent "sees" and determines what to do on
+    /// </summary>
     public override void CollectObservations()
     {
 
@@ -90,11 +94,13 @@ public class FoxAgent : Agent
         // 3 total values
     }
 
+    /// <summary>
+    /// Asks for a decision every 5 updates
+    /// Asks for a action every other frame
+    /// </summary>
     private void FixedUpdate()
     {
-        // Request a decision every 5 steps. RequestDecision() automatically calls RequestAction(),
-        // but for the steps in between, we need to call it explicitly to take action using the results
-        // of the previous decision
+        
         if (GetStepCount() % 5 == 0)
         {
             RequestDecision();
@@ -107,7 +113,7 @@ public class FoxAgent : Agent
     }
 
     /// <summary>
-    /// 
+    /// Resets Envirnment and Agent
     /// </summary>
     public override void AgentReset()
     {

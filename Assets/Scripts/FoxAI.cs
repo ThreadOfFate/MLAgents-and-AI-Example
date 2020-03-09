@@ -45,7 +45,7 @@ public class FoxAI : MonoBehaviour
         }
 
 
-        //Vector3 chasersDirection = transform.position - obstacles[0];
+        
         Vector3 AIDirection = target - transform.position;
 
         float ignoreDistance = 10f;
@@ -80,7 +80,7 @@ public class FoxAI : MonoBehaviour
 
 
     /// <summary>
-    /// 
+    /// Will attempt to predict where the Target will be in 1 second and pathfind to there
     /// </summary>
     /// <param name="target"></param>
     /// <returns></returns>
