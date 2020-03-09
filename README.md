@@ -1,4 +1,4 @@
-# MLAgent-and-AI-Example
+# MLAgents-and-AI-Example
 
 
 You will need to install ML-Agents 0.14.0 to run this.
