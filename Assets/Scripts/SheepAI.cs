@@ -5,9 +5,21 @@ using UnityEngine.AI;
 
 public class SheepAI : MonoBehaviour
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public NavMeshAgent navMeshAgent;
+    /// <summary>
+    /// 
+    /// </summary>
     public GrassManager grassManager;
+    /// <summary>
+    /// 
+    /// </summary>
     public List<Transform> obstacles;
+    /// <summary>
+    /// 
+    /// </summary>
     float eatRange = 1f;
 
     public Transform target;
@@ -59,7 +71,7 @@ public class SheepAI : MonoBehaviour
 
         //Vector3 chasersDirection = transform.position - obstacles[0];
         Vector3 AIDirection = target - transform.position;
-
+        
         float ignoreDistance = 10f;
         float fullEvasionDistance = 3.5f;
 
