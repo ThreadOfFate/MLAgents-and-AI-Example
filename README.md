@@ -1,6 +1,7 @@
 # MLAgents-and-AI-Example
 
-Editor Version !2019.3.3f1(unityhub://2019.3.3f1/7ceaae5f7503)
+Editor Version 2019.3.3f1
+unityhub://2019.3.3f1/7ceaae5f7503
 You will need to install ML-Agents 0.14.0 to run this.
 
 https://github.com/Unity-Technologies/ml-agents/tree/release-0.14.0
